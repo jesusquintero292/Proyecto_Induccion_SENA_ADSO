@@ -1,0 +1,2657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sitio de aprendizaje elaborado a partir de las tres guías de formación SENA del programa ADSO.">
+    <title>HTMLDORES</title>
+    <style>
+        :root{
+            --green:#087f5b;
+            --deep:#064e3b;
+            --lime:#c8f169;
+            --ink:#172b26;
+            --muted:#61736d;
+            --paper:#f7f9f5;
+            --white:#fff;--line:#dfe8e1;
+            --orange:#ffb15c;
+            --shadow:0 18px 50px #153c2a12;
+        }
+
+        *{
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+            scroll-padding-top:90px;
+        }
+
+        body{
+            margin:0;background:var(--paper);
+            color:var(--ink);
+            font:16px/1.7 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+        }
+
+        img{
+            display:block;
+            width:100%;object-fit:cover;
+        }
+
+        a{
+            color:inherit;
+        }
+
+        button{
+            font:inherit;
+        }
+
+        .topbar{
+            position:sticky;
+            top:0;
+            z-index:20;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:22px;
+            padding:13px max(5vw,20px);
+            background:#ffffffed;
+            backdrop-filter:blur(14px);
+            border-bottom:1px solid #e6eee7;
+        }
+
+        .brand{
+            display:flex;
+            align-items:center;
+            gap:11px;
+            text-decoration:none;
+            min-width:max-content;
+        }
+
+        .brand-icon{
+            display:grid;
+            place-items:center;
+            width:42px;height:42px;
+            border-radius:14px;
+            background:var(--green);
+            color:white;
+            font-size:22px;
+            font-weight:900;
+        }
+
+        .brand strong,.brand small{
+            display:block;
+            line-height:1.25;
+        }
+
+        .brand small{
+            color:var(--muted);
+            font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+        }
+
+        .nav{
+            display:flex;
+            gap:8px;
+            align-items:center;
+        }
+
+        .nav a{
+            font-size:13px;
+            text-decoration:none;
+            color:#43574f;
+            padding:9px 12px;
+            border-radius:99px;
+        }
+
+        .nav a:hover,.nav a.active{
+            background:#e7f4e8;
+            color:var(--deep);
+        }
+
+        .menu-btn{
+            display:none;
+            background:var(--green);
+            color:#fff;
+            border:0;
+            border-radius:10px;
+            padding:8px 12px;
+        }
+
+        .hero{
+            display:grid;
+            grid-template-columns:1.02fr .98fr;
+            min-height:570px;
+            align-items:center;
+            gap:4vw;
+            padding:68px max(7vw,24px);
+            background:radial-gradient(circle at 0% 0%,#e1f6d2 0,transparent 35%),linear-gradient(130deg,#f7faf4,#edf7ef);
+        }
+
+        .eyebrow{
+            font-size:11px;
+            letter-spacing:.17em;
+            font-weight:800;
+            color:var(--green);
+            text-transform:uppercase;
+            margin:0 0 13px;
+        }
+
+        .hero h1{
+            font-size:clamp(40px,5.6vw,74px);
+            line-height:1.02;
+            letter-spacing:-.055em;
+            margin:0 0 24px;
+            max-width:720px;
+        }
+
+        .hero h1 em{
+            font-style:normal;
+            color:var(--green);
+        }
+
+        .hero p.lead{
+            max-width:620px;color:#51665d;
+            font-size:18px;
+        }
+
+        .actions{
+            display:flex;
+            flex-wrap:wrap;
+            gap:12px;
+            margin-top:28px;
+        }
+
+        .btn{
+            display:inline-flex;
+            align-items:center;
+            gap:10px;padding:13px 19px;
+            border-radius:99px;
+            text-decoration:none;
+            font-weight:750;
+            font-size:14px;
+            border:1px solid transparent;
+        }
+
+        .btn.main{
+            background:var(--green);
+            color:white;
+        }
+
+        .btn.secondary{
+            border-color:#bfd3c4;
+            background: #fff;
+        }
+
+        .hero-visual{
+            position:relative;
+        }
+
+        .hero-visual>img{
+            height:420px;
+            border-radius:32px;
+            box-shadow:var(--shadow);
+        }
+
+        .floating{
+            position:absolute;
+            left:-24px;
+            bottom:22px;
+            max-width:255px;
+            padding:16px 19px;
+            border-radius:18px;
+            background:white;
+            box-shadow:var(--shadow);
+            display:flex;
+            gap:12px;
+            align-items:center;
+        }
+
+        .floating .star{
+            display:grid;
+            place-items:center;
+            flex:0 0 38px;
+            height:38px;
+            border-radius:12px;
+            background:#eef8d6;
+            font-size:21px;
+        }
+
+        .floating strong,.floating small{
+            display:block;
+            line-height:1.4;
+        }
+
+        .floating small{
+            font-size:12px;
+            color:var(--muted);
+        }
+
+        .stats{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:1px;
+            background:var(--line);
+            border-block:1px solid var(--line);
+        }
+
+        .stat{
+            background:white;
+            padding:20px 5vw;
+        }
+
+        .stat b{
+            font-size:24px;
+            color:var(--green);
+            display:block;
+            line-height:1.3;
+        }
+
+        .stat span{
+            font-size:12px;
+            color:var(--muted);
+        }
+
+        .wrap{
+            width:min(1160px,90vw);
+            margin:auto;
+        }
+
+        .section{
+            padding:78px 0;
+        }
+
+        .section.soft{
+            background:#edf5ed;
+        }
+
+        .section.dark{
+            background:#0c3329;
+            color:white;
+        }
+
+        .heading{
+            display:flex;
+            justify-content:space-between;
+            align-items:end;
+            gap:20px;
+            margin-bottom:30px;
+        }
+
+        .heading h2{
+            font-size:clamp(30px,4vw,48px);
+            line-height:1.08;
+            letter-spacing:-.04em;margin:0;
+        }
+
+        .heading .number{
+            font-weight:850;
+            letter-spacing:.12em;
+            color:var(--green);
+            font-size:12px;
+            border:1px solid #c8dfce;
+            border-radius:99px;
+            padding:8px 13px;
+            white-space:nowrap;
+        }
+
+        .section.dark .eyebrow,.section.dark .number{
+            color:var(--lime);
+        }
+
+        .section.dark .number{
+            border-color:#43675b;
+        }
+
+        .intro-grid{
+            display:grid;
+            grid-template-columns:.8fr 1.2fr;gap:40px;
+            align-items:start;
+        }
+
+        .intro-grid p{
+            margin-top:0;color:var(--muted);
+        }
+        .section.dark .intro-grid p{
+            color:#c2d4cb;
+        }
+
+        .two-col{
+            display:grid;
+            grid-template-columns:1.05fr .95fr;
+            gap:35px;
+            align-items:center;
+        }
+
+        .two-col img{
+            height:390px;
+            border-radius:24px;
+        }
+
+        .copy h3{
+            font-size:23px;
+            line-height:1.25;
+            margin:0 0 12px
+        }
+
+        .copy p{
+            color:var(--muted);
+            margin:0 0 17px;
+        }
+
+        .quote{
+            border-left:4px solid var(--lime);
+            background:#f0f7e5;
+            padding:17px 20px;margin:22px 0;
+            border-radius:0 14px 14px 0;
+            font-weight:650;
+            color:#294b38;
+        }
+
+        .section.dark .quote{
+            background:#16483a;
+            color:#e9f5e7;
+        }
+
+        .subhead{
+            font-size:24px;
+            margin:42px 0 18px;
+            letter-spacing:-.025em;
+        }
+
+        .card-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+        }
+
+        .card{
+            background:white;
+            border:1px solid var(--line);
+            border-radius:20px;
+            overflow:hidden;
+            box-shadow:0 7px 22px #153c2a06;
+        }
+
+        .card img{
+            height:180px;
+        }
+
+        .card-body{
+            padding:21px;
+        }
+
+        .tag{
+            display:inline-block;
+            font-size:10px;
+            letter-spacing:.12em;
+            text-transform:uppercase;
+            font-weight:850;
+            color:var(--green);
+            background:#e9f5e8;
+            padding:5px 9px;
+            border-radius:99px;
+            margin-bottom:10px;
+        }
+
+        .card h3{
+            margin:0 0 8px;
+            font-size:20px;
+            line-height:1.25;
+        }
+
+        .card p{
+            margin:0;
+            color:var(--muted);
+            font-size:14px;
+        }
+
+        .table-wrap{
+            overflow:auto;
+            border:1px solid var(--line);
+            border-radius:16px;
+            background:white;
+            margin-top:20px;
+        }
+
+        table{
+            border-collapse:collapse;
+            width:100%;
+            min-width:660px;
+        }
+
+        th,td{
+            text-align:left;
+            vertical-align:top;
+            padding:16px;
+            border-bottom:1px solid var(--line);
+        }
+
+        th{
+            font-size:11px;
+            text-transform:uppercase;
+            letter-spacing:.1em;
+            background:#edf6ed;
+            color:#315747;
+        }
+
+        td{
+            font-size:14px;
+        }
+
+        tbody tr:last-child td{
+            border-bottom:0;
+        }
+
+        td strong{
+            color:var(--deep);
+        }
+
+        .small-note{
+            font-size:12px;
+            color:var(--muted);
+            margin-top:10px;
+        }
+
+        .pill-list{
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-top:18px;
+        }
+
+        .pill-list span{
+            font-size:12px;
+            font-weight:700;
+            padding:8px 12px;
+            border:1px solid #c7ddc9;
+            border-radius:99px;
+            background:#fff;
+        }
+
+        .process-grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:18px
+        }
+
+        .process{
+            display:grid;
+            grid-template-columns:145px 1fr;
+            gap:18px;
+            background:white;
+            border:1px solid var(--line);
+            border-radius:20px;
+            padding:13px;
+            align-items:start;
+        }
+
+        .process img{
+            height:100%;
+            min-height:190px;
+            border-radius:14px;
+        }
+
+        .process h3{
+            margin:6px 0 8px;
+            font-size:20px;
+            line-height:1.2;
+        }
+
+        .process p{
+            font-size:13px;
+            line-height:1.6;
+            color:var(--muted);
+            margin:8px 0;
+        }
+
+        .process p strong{
+            color:#315747;
+        }
+
+        .process.step{
+            font-size:10px;
+            font-weight:900;
+            letter-spacing:.13em;
+            color:var(--green);
+        }
+
+        .concepts{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:15px;
+            margin-top:22px;
+        }
+
+        .concept{
+            background:#e4f1e2;
+            border-radius:17px;
+            padding:20px;
+        }
+
+        .concept strong{
+            font-size:18px;
+        }
+
+        .concept p{
+            font-size:13px;
+            color:#4f6658;
+            margin-bottom:0;
+        }
+
+        .timeline{display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:20px;
+        }
+
+        .timeline article{
+            padding:25px;
+            border-radius:20px;
+            background:#164638;
+            border:1px solid #315e4d;
+        }
+
+        .timeline h3{
+            margin:0 0 9px;
+            font-size:23px;
+            color:var(--lime);
+        }
+
+        .timeline p{color:#d0e0d6;
+            margin:0;
+        }
+
+        .three-points{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:15px;
+            margin-top:24px;
+        }
+
+        .point{
+            border:1px solid #315e4d;
+            border-radius:18px;
+            padding:22px;
+            background:#123e31;
+        }
+
+        .point .symbol{
+            font-size:25px;
+            color:var(--lime);
+        }
+
+        .point h3{
+            margin:8px 0;
+        }
+
+        .point p{
+            margin:0;
+            color:#c4d9cc;
+            font-size:14px;
+        }
+
+        .competency-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:16px;
+        }
+
+        .competency{
+            background:white;
+            border-radius:18px;
+            padding:22px;
+            border:1px solid var(--line);
+        }
+
+        .competency h3{
+            margin:0 0 12px;color:var(--green);
+        }
+
+        .competency ul{padding-left:18px;
+            margin:0;
+            color:var(--muted);
+            font-size:13px;
+        }
+
+        .competency li{
+            margin:7px 0;
+        }
+
+        .reflection-grid{display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:16px;
+        }
+
+        .reflection{
+            background:white;
+            border:1px solid var(--line);
+            border-radius:18px;
+            padding:22px
+        }
+
+        .reflection h3{
+            font-size:19px;
+            margin:0 0 8px;
+        }
+
+        .reflection p{
+            font-size:14px;
+            color:var(--muted);
+            margin:0;
+        }
+
+        .qa{
+            display:grid;gap:12px;
+        }
+
+        .qa details{
+            background:white;
+            border:1px solid var(--line);
+            border-radius:14px;
+            padding:0 18px;
+        }
+
+        .qa summary{
+            cursor:pointer;
+            padding:17px 0;
+            font-weight:750;
+        }
+
+        .qa details p{
+            color:var(--muted);
+            font-size:14px;
+            margin:0 0 18px;
+        }
+
+        .autobio{
+            display:grid;
+            grid-template-columns:.75fr 1.25fr;
+            gap:30px;
+            align-items:start;}
+            
+        .autobio img{
+            height:430px;
+            border-radius:24px;
+            position:sticky;
+            top:100px;
+        }
+
+        .question-list{
+            counter-reset:q;
+            display:grid;
+            gap:12px;
+        }
+
+        .question{
+            background:white;
+            border:1px solid var(--line);
+            border-radius:16px;
+            padding:19px 20px 19px 62px;
+            position:relative;
+        }
+
+        .question:before{counter-increment:q;
+            content:counter(q,decimal-leading-zero);
+            position:absolute;
+            left:19px;
+            top:19px;
+            color:var(--green);
+            font-weight:900;
+            font-size:13px;
+        }
+
+        .question h3{
+            margin:0 0 7px;
+            font-size:17px;
+        }
+
+        .question p{
+            margin:0
+            ;color:var
+            (--muted)
+            ;font-size:14px;
+        }
+
+        .dimension-grid{
+            display:grid;
+            grid-template-columns:
+            repeat(2,1fr);
+            gap:14px;
+        }
+
+        .dimension{
+            background:white;
+            border:1px solid var(--line);
+            border-radius:17px;
+            padding:20px;
+        }
+
+        .dimension h3{
+            margin:0 0 12px;
+            font-size:18px;
+        }
+
+        .dimension .columns{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:12px;
+        }
+
+        .dimension b{
+            display:block;
+            font-size:10px;
+            letter-spacing:.1em;
+            text-transform:uppercase;
+            color:var(--green);
+            margin-bottom:5px;
+        }
+
+        .dimension p{
+            font-size:13px;
+            color:var(--muted);
+            margin:0;
+        }
+
+        .closing{
+            background:linear-gradient(120deg,#d9f4c3,#eff8e8);
+            border-radius:25px;
+            padding:30px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:24px;
+            margin-top:34px;
+        }
+
+        .closing h3{font-size:27px;
+            line-height:1.15;
+            margin:0 0 8px;
+        }
+
+        .closing p{
+            margin:0;color:#4b6654;
+            max-width:650px;
+        }
+
+        .backtop{
+            position:fixed;
+            right:20px;
+            bottom:20px;
+            width:46px;
+            height:46px;
+            display:grid;
+            place-items:center;
+            border:0;
+            border-radius:50%;
+            background:var(--green);
+            color:white;
+            font-size:22px;
+            box-shadow:var(--shadow);
+            cursor:pointer;
+            opacity:0;
+            pointer-events:none;
+            transform:translateY(10px);
+            transition:.2s;
+            z-index:15;
+        }
+
+        .backtop.show{
+            opacity:1;
+            pointer-events:auto;
+            transform:translateY(0);
+        }
+
+
+        /* =====================================
+        CASO DE ESTUDIO #5 - DISEÑO COMPLETO
+        ===================================== */
+
+        .caso-page {
+            --caso-green: #17663b;
+            --caso-dark: #103c2c;
+            --caso-light: #e8f3eb;
+            --caso-text: #344a3b;
+            --caso-muted: #68796d;
+
+            background: #f7f9f6;
+            color: var(--caso-text);
+            width: 100%;
+            overflow: hidden;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .caso-page *,
+        .caso-page *::before,
+        .caso-page *::after {
+            box-sizing: border-box;
+        }
+
+        .caso-page img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .caso-page h2,
+        .caso-page h3,
+        .caso-page h4,
+        .caso-page p {
+            overflow-wrap: break-word;
+        }
+
+        /* PORTADA */
+
+        .caso-hero {
+            position: relative;
+            min-height: 540px;
+            display: flex;
+            align-items: center;
+            padding: 80px 9%;
+            background: #103c2c;
+            isolation: isolate;
+            overflow: hidden;
+        }
+
+        .caso-hero-img,
+        .caso-hero-overlay {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .caso-hero-img {
+            object-fit: cover;
+            object-position: center 40%;
+            z-index: -2;
+        }
+
+        .caso-hero-overlay {
+            background: linear-gradient(
+                90deg,
+                rgba(7, 38, 26, 0.96) 0%,
+                rgba(10, 51, 34, 0.83) 48%,
+                rgba(8, 35, 25, 0.35) 100%
+            );
+            z-index: -1;
+        }
+
+        .caso-hero-content {
+            max-width: 720px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .caso-badge {
+            display: inline-block;
+            padding: 10px 15px;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 50px;
+            color: #d4f4dc;
+            background: rgba(255,255,255,0.08);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            margin-bottom: 25px;
+        }
+
+        .caso-hero-content h2 {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            line-height: 1.08;
+            letter-spacing: -2px;
+            color: #ffffff;
+            margin: 0 0 22px;
+        }
+
+        .caso-hero-content h2 span {
+            color: #9de0b1;
+        }
+
+        .caso-hero-content > p {
+            max-width: 600px;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #edf7ef;
+            margin: 0 0 30px;
+        }
+
+        .caso-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 18px;
+            padding: 15px 23px;
+            border-radius: 8px;
+            background: #8ed6a5;
+            color: #123b29;
+            text-decoration: none;
+            font-weight: 800;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .caso-btn:hover {
+            background: #b6edc5;
+            transform: translateY(-2px);
+        }
+
+        .caso-btn span {
+            font-size: 1.3rem;
+        }
+
+        .caso-hero-number {
+            position: absolute;
+            right: 7%;
+            bottom: -70px;
+            font-size: clamp(12rem, 25vw, 23rem);
+            line-height: 1;
+            font-weight: 900;
+            color: rgba(255,255,255,0.09);
+            pointer-events: none;
+        }
+
+        /* INTRODUCCIÓN */
+
+        .caso-intro {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 100px 35px 80px;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            align-items: center;
+            gap: 65px;
+        }
+
+        .caso-overline {
+            display: inline-block;
+            color: var(--caso-green);
+            font-size: 0.77rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-bottom: 17px;
+        }
+
+        .caso-intro-text h3,
+        .caso-section-heading h3,
+        .caso-proceso-content h3,
+        .caso-soportes-text h3 {
+            color: #143e2b;
+            font-size: clamp(1.9rem, 3vw, 2.8rem);
+            line-height: 1.2;
+            letter-spacing: -0.7px;
+            margin: 0 0 24px;
+        }
+
+        .caso-intro-text p,
+        .caso-proceso-content > p,
+        .caso-soportes-text > p {
+            color: #536459;
+            font-size: 1rem;
+            line-height: 1.95;
+            margin: 0 0 17px;
+        }
+
+        .caso-intro-image {
+            position: relative;
+            min-width: 0;
+        }
+
+        .caso-intro-image > img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 18px;
+            box-shadow: 0 18px 45px rgba(18, 55, 42, 0.14);
+        }
+
+        .caso-image-caption {
+            position: absolute;
+            left: -25px;
+            bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            max-width: 270px;
+            background: #ffffff;
+            border-left: 5px solid #27864e;
+            border-radius: 8px;
+            padding: 20px 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+
+        .caso-image-caption strong {
+            color: #153e2b;
+            font-size: 1.05rem;
+        }
+
+        .caso-image-caption span {
+            color: #647368;
+            font-size: 0.9rem;
+        }
+
+        /* INDICADORES */
+
+        .caso-stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            background: #103c2c;
+            padding: 42px 7%;
+            gap: 0;
+        }
+
+        .caso-stat {
+            padding: 10px 25px;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            min-width: 0;
+        }
+
+        .caso-stat:last-child {
+            border-right: none;
+        }
+
+        .caso-stat-number {
+            display: block;
+            color: #a5e5b8;
+            font-size: clamp(2rem, 4vw, 3.1rem);
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .caso-stat-title {
+            display: block;
+            color: #ffffff;
+            font-size: 0.98rem;
+            font-weight: 800;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .caso-stat p {
+            color: #c8ded0;
+            font-size: 0.86rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* ENCABEZADOS DE BLOQUES */
+
+        .caso-section-heading {
+            max-width: 780px;
+            margin: 0 auto 45px;
+            text-align: center;
+            padding: 0 15px;
+        }
+
+        .caso-section-heading h3 {
+            margin-bottom: 17px;
+        }
+
+        .caso-section-heading > p {
+            color: #66766b;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* ANTECEDENTES */
+
+        .caso-antecedentes {
+            padding: 95px 7%;
+        }
+
+        .caso-ante-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .caso-ante-card {
+            padding: 30px 25px;
+            border: 1px solid #e1eae2;
+            border-radius: 14px;
+            background: #ffffff;
+            box-shadow: 0 8px 25px rgba(19, 59, 42, 0.04);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .caso-ante-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(19, 59, 42, 0.1);
+        }
+
+        .caso-ante-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: #e3f3e8;
+            border-radius: 12px;
+            color: #17663b;
+            font-size: 1.05rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .caso-ante-card h4 {
+            color: #193f2c;
+            font-size: 1.08rem;
+            line-height: 1.45;
+            margin: 0 0 14px;
+        }
+
+        .caso-ante-card p {
+            color: #617065;
+            font-size: 0.93rem;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        /* PROCEDIMIENTO */
+
+        .caso-proceso {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            background: #eaf2eb;
+            align-items: stretch;
+        }
+
+        .caso-proceso-image {
+            min-height: 650px;
+        }
+
+        .caso-proceso-image img {
+            width: 100%;
+            height: 100%;
+            min-height: 650px;
+            object-fit: cover;
+        }
+
+        .caso-proceso-content {
+            padding: 80px clamp(35px, 7vw, 100px);
+        }
+
+        .caso-proceso-content h3 {
+            margin-bottom: 23px;
+        }
+
+        .caso-proceso-list {
+            margin-top: 35px;
+        }
+
+        .caso-proceso-list > div {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .caso-proceso-list > div > span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #17663b;
+            color: #ffffff;
+            font-weight: 900;
+        }
+
+        .caso-proceso-list p {
+            margin: 0;
+        }
+
+        .caso-proceso-list strong {
+            display: block;
+            color: #193f2c;
+            font-size: 1rem;
+            margin: 0 0 7px;
+        }
+
+        .caso-proceso-list small {
+            display: block;
+            color: #5e7163;
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* SOPORTES */
+
+        .caso-soportes {
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 100px 35px;
+            display: grid;
+            grid-template-columns: 1fr 0.85fr;
+            align-items: center;
+            gap: 65px;
+        }
+
+        .caso-soportes-text > p {
+            margin-bottom: 28px;
+        }
+
+        .caso-soporte-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            margin: 22px 0;
+        }
+
+        .caso-check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            flex-shrink: 0;
+            background: #dff1e4;
+            color: #17663b;
+            border-radius: 50%;
+            font-weight: 900;
+        }
+
+        .caso-soporte-item strong {
+            display: block;
+            color: #193f2c;
+            margin-bottom: 6px;
+        }
+
+        .caso-soporte-item p {
+            color: #627267;
+            font-size: 0.94rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .caso-soportes-image {
+            position: relative;
+        }
+
+        .caso-soportes-image img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .caso-document-label {
+            position: absolute;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            background: rgba(16, 60, 44, 0.94);
+            color: #ffffff;
+            padding: 23px;
+            border-radius: 10px;
+        }
+
+        .caso-document-label span {
+            color: #a8e6bd;
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+        }
+
+        .caso-document-label strong {
+            line-height: 1.5;
+            font-size: 1.05rem;
+        }
+
+        /* ESCENARIOS */
+
+        .caso-escenarios {
+            background: #edf4ee;
+            padding: 95px 7%;
+        }
+
+        .caso-escenarios-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px;
+        }
+
+        .caso-escenario {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(17, 58, 39, 0.07);
+            border: 1px solid #dfe9e0;
+            min-width: 0;
+        }
+
+        .caso-escenario-ayuda {
+            border-top: 6px solid #278650;
+        }
+
+        .caso-escenario-proceso {
+            border-top: 6px solid #b37b34;
+        }
+
+        .caso-escenario-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .caso-escenario-icon {
+            font-size: 2rem;
+        }
+
+        .caso-escenario-label {
+            font-size: 0.72rem;
+            letter-spacing: 1.4px;
+            font-weight: 900;
+            color: #607166;
+        }
+
+        .caso-escenario h4 {
+            color: #173d2a;
+            font-size: 1.5rem;
+            line-height: 1.35;
+            margin: 0 0 17px;
+        }
+
+        .caso-escenario > p {
+            color: #586a5d;
+            line-height: 1.85;
+            margin: 0 0 20px;
+        }
+
+        .caso-escenario ul {
+            padding-left: 22px;
+            margin: 0 0 25px;
+        }
+
+        .caso-escenario li {
+            color: #485c4e;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .caso-escenario-result {
+            padding: 20px;
+            border-radius: 10px;
+            background: #edf5ee;
+        }
+
+        .caso-escenario-proceso .caso-escenario-result {
+            background: #f8f1e7;
+        }
+
+        .caso-escenario-result strong {
+            display: block;
+            color: #1b6039;
+            margin-bottom: 8px;
+        }
+
+        .caso-escenario-proceso .caso-escenario-result strong {
+            color: #80551d;
+        }
+
+        .caso-escenario-result p {
+            color: #4e6254;
+            line-height: 1.7;
+            margin: 0;
+            font-size: 0.94rem;
+        }
+
+        /* REFERENCIAS NORMATIVAS */
+
+        .caso-reglamento {
+            padding: 95px 7%;
+        }
+
+        .caso-articulos {
+            max-width: 1050px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .caso-articulo {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 27px;
+            border: 1px solid #e0e9e1;
+            background: #ffffff;
+            border-radius: 12px;
+        }
+
+        .caso-articulo-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 65px;
+            height: 65px;
+            border-radius: 12px;
+            background: #dff1e4;
+            color: #17663b;
+            font-size: 1.8rem;
+            font-weight: 900;
+        }
+
+        .caso-articulo h4 {
+            color: #1c472f;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin: 0 0 10px;
+        }
+
+        .caso-articulo p {
+            color: #627267;
+            font-size: 0.92rem;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .caso-aviso-legal {
+            max-width: 1050px;
+            margin: 28px auto 0;
+            padding: 22px 25px;
+            border-left: 5px solid #b37b34;
+            border-radius: 5px;
+            background: #faf2e6;
+            color: #6a542f;
+            font-size: 0.93rem;
+            line-height: 1.8;
+        }
+
+        /* CIERRE VISUAL */
+
+        .caso-cierre {
+            position: relative;
+            min-height: 560px;
+            display: flex;
+            align-items: center;
+            padding: 85px 9%;
+            background: #103c2c;
+            isolation: isolate;
+        }
+
+        .caso-cierre > img,
+        .caso-cierre-overlay {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .caso-cierre > img {
+            object-fit: cover;
+            object-position: center;
+            z-index: -2;
+        }
+
+        .caso-cierre-overlay {
+            background: linear-gradient(
+                90deg,
+                rgba(8, 41, 28, 0.97),
+                rgba(9, 47, 32, 0.88) 65%,
+                rgba(8, 41, 28, 0.48)
+            );
+            z-index: -1;
+        }
+
+        .caso-cierre-content {
+            max-width: 850px;
+        }
+
+        .caso-cierre-content .caso-overline {
+            color: #a8e6bd;
+        }
+
+        .caso-cierre-content h3 {
+            color: #ffffff;
+            font-size: clamp(2rem, 4vw, 3.3rem);
+            line-height: 1.2;
+            margin: 0 0 25px;
+        }
+
+        .caso-cierre-content > p {
+            color: #e1eee5;
+            font-size: 1rem;
+            line-height: 1.95;
+            margin: 0 0 18px;
+        }
+
+        .caso-firma {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 35px;
+        }
+
+        .caso-firma > span {
+            display: block;
+            width: 45px;
+            height: 3px;
+            background: #a8e6bd;
+        }
+
+        .caso-firma p {
+            color: #a8e6bd;
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 1.3px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* TABLETAS */
+
+        @media (max-width: 1000px) {
+            .caso-ante-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .caso-stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                row-gap: 30px;
+            }
+
+            .caso-stat:nth-child(2) {
+                border-right: none;
+            }
+
+            .caso-proceso-content {
+                padding: 55px 35px;
+            }
+
+            .caso-intro,
+            .caso-soportes {
+                gap: 40px;
+            }
+        }
+
+        /* CELULARES */
+
+        @media (max-width: 680px) {
+            .caso-hero {
+                min-height: 500px;
+                padding: 65px 7%;
+            }
+
+            .caso-hero-content h2 {
+                letter-spacing: -1px;
+            }
+
+            .caso-hero-content > p {
+                font-size: 1rem;
+            }
+
+            .caso-hero-number {
+                right: 0;
+                bottom: -25px;
+                font-size: 12rem;
+            }
+
+            .caso-intro,
+            .caso-soportes {
+                grid-template-columns: 1fr;
+                padding: 60px 6%;
+                gap: 35px;
+            }
+
+            .caso-intro-image > img {
+                height: 320px;
+            }
+
+            .caso-image-caption {
+                left: 12px;
+                bottom: 12px;
+                max-width: calc(100% - 24px);
+            }
+
+            .caso-stats {
+                padding: 35px 5%;
+            }
+
+            .caso-stat {
+                padding: 10px 13px;
+            }
+
+            .caso-stat-number {
+                font-size: 2rem;
+            }
+
+            .caso-stat-title {
+                font-size: 0.9rem;
+            }
+
+            .caso-stat p {
+                font-size: 0.82rem;
+            }
+
+            .caso-antecedentes,
+            .caso-escenarios,
+            .caso-reglamento {
+                padding: 65px 6%;
+            }
+
+            .caso-ante-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .caso-ante-card {
+                padding: 25px;
+            }
+
+            .caso-proceso {
+                grid-template-columns: 1fr;
+            }
+
+            .caso-proceso-image,
+            .caso-proceso-image img {
+                min-height: 0;
+                height: 270px;
+            }
+
+            .caso-proceso-content {
+                padding: 55px 6%;
+            }
+
+            .caso-soportes-image img {
+                height: 330px;
+            }
+
+            .caso-escenarios-grid,
+            .caso-articulos {
+                grid-template-columns: 1fr;
+            }
+
+            .caso-escenario {
+                padding: 26px;
+            }
+
+            .caso-articulo {
+                padding: 22px;
+                gap: 15px;
+            }
+
+            .caso-articulo-num {
+                width: 52px;
+                height: 52px;
+                font-size: 1.45rem;
+            }
+
+            .caso-cierre {
+                min-height: 0;
+                padding: 65px 7%;
+            }
+        }
+
+        /* RESPETO POR PREFERENCIAS DE MOVIMIENTO */
+
+        @media (prefers-reduced-motion: reduce) {
+            .caso-page *,
+            .caso-page *::before,
+            .caso-page *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+
+
+        /* FOOTER */
+        .footer {
+            background-color: #12372a;
+            color: #ffffff;
+            padding: 45px 7% 20px;
+            margin-top: 60px;
+            width: 100%;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+        }
+
+        .footer-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1.3fr 0.8fr;
+            gap: 35px;
+            align-items: start;
+        }
+
+        .footer h2 {
+            color: #a8e6bd;
+            font-size: 1.5rem;
+            margin: 0 0 15px;
+        }
+
+        .footer h3 {
+            color: #a8e6bd;
+            font-size: 1.1rem;
+            margin: 0 0 15px;
+        }
+
+        .footer p {
+            color: #ffffff;
+            line-height: 1.7;
+            margin: 0 0 10px;
+        }
+
+        .footer-program {
+            color: #fff;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .footer-participants ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-participants li {
+            color: #ffffff;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #a8e6bd;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            width: 100%;
+            max-width: 1200px;
+            margin: 35px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #426354;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .footer-bottom p {
+            color: #d6e5dc;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Botón para volver arriba */
+        #backtop {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1000;
+            background-color: #23834d;
+            color: #000000;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 22px;
+        }
+
+        /* Adaptación a celulares y tabletas */
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer {
+                padding: 35px 6% 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar" id="top">
+        <a class="brand" href="#top"><span class="brand-icon">S</span><span><strong>Mi ruta de formación</strong><small>SENA · Análisis y Desarrollo de Software</small></span></a>
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir navegación" aria-expanded="false">☰</button>
+        <nav class="nav" id="nav">
+            <a href="#guia1">Guía 1 · SENA</a>
+            <a href="#guia2">Guía 2 · Procesos</a>
+            <a href="#guia3">Guía 3 · Proyecto de vida</a>
+            <a href="#caso">Caso</a></nav>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="fade">
+                <p class="eyebrow">PROGRAMA DE FORMACIÓN · CÓDIGO 3603495</p>
+                <h1>Aprender hoy para <em>transformar</em> mañana.</h1>
+                <p class="lead">Un recorrido por las tres guías de aprendizaje: la identidad del SENA, los procesos productivos y las decisiones que ayudan a construir un proyecto de vida responsable.</p>
+                <div class="actions">
+                    <a class="btn main" href="#guia1">Explorar las guías <span>↘</span></a>
+                    <a class="btn secondary" href="#guia3">Conocer mi proyecto de vida</a>
+                </div>
+            </div>
+            <div class="hero-visual fade">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1300&q=85" alt="Estudiantes colaborando en un espacio de aprendizaje">
+                <div class="floating">
+                    <span class="star">✦</span>
+                    <div><strong>Formación integral</strong>
+                            <small>Conocimiento, práctica y valores</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="stats">
+            <div class="stat">
+                <b>03</b>
+                <span>guías de aprendizaje reunidas</span>
+            </div>
+            <div class="stat">
+                <b>07</b>
+                <span>etapas del proceso productivo estudiadas</span>
+            </div><div class="stat">
+                <b>08</b>
+                <span>dimensiones del desarrollo humano</span>
+            </div>
+        </div>
+        <section class="section" id="guia1">
+            <div class="wrap">
+                <div class="heading">
+                    <div>
+                        <p class="eyebrow">IDENTIDAD INSTITUCIONAL Y FORMACIÓN</p>
+                        <h2>Guía 1. Conocer el SENA<br>y mi formación</h2>
+                    </div>
+                    <span class="number">GUÍA 01</span>
+                </div>
+                <div class="two-col">
+                    <div class="copy">
+                        <h3>¿Qué beneficios representa ingresar al SENA?</h3>
+                        <p>Como aprendiz SENA, la institución ofrece un proceso educativo teórico-práctico para poner en práctica los conocimientos durante la formación ADSO. Este proceso permite desarrollar cualidades relacionadas con el <strong>ser, saber y hacer</strong>, mediante una formación orientada al trabajo.</p>
+                        <div class="quote">“Mi formación puede ayudarme a crecer personal y profesionalmente, y a aportar al desarrollo social y técnico del país”.</div>
+                        <h3>¿Quién soy y cómo me veo como egresado?</h3>
+                        <p>A largo plazo, me proyecto como egresado SENA del programa ADSO, contribuyendo a la ciudadanía colombiana y buscando un impacto económico, social y ambiental. Para ello, podré aplicar las competencias y habilidades blandas que adquiera a lo largo del proceso educativo.</p>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1000&q=85" alt="Estudiantes reunidos en un entorno de formación">
+                </div>
+                <h3 class="subhead">Lo que sé y lo que espero de la institución</h3>
+                <div class="table-wrap">   
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pregunta</th>
+                                <th>Reflexión de la guía</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>¿Qué sabemos del SENA?</strong>
+                                </td>
+                                <td>Es una institución enfocada en la formación para el trabajo. Surgió para capacitar a las personas laboralmente y hoy ofrece diferentes oportunidades relacionadas con la formación técnica, el emprendimiento y el empleo.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>¿Cuáles son mis expectativas frente a la formación?</strong>
+                                </td>
+                                <td>Espero recibir una formación teórico-práctica en el mundo del desarrollo de software, que pueda adaptarse al proceso de cada aprendiz y articular la teoría con la práctica.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3 class="subhead">Servicios y áreas que acompañan la formación</h3>
+                <p>En la guía se identifican entidades y áreas que apoyan el emprendimiento, la búsqueda de empleo, la innovación, el bienestar y el aprendizaje. Las ubicaciones y personas responsables se presentan tal como aparecen en el documento de trabajo.</p>
+                <div class="card-grid">
+                    <article class="card"><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80" alt="Personas trabajando en una idea de negocio">
+                        <div class="card-body">
+                            <span class="tag">Emprendimiento</span>
+                            <h3>Fondo Emprender</h3>
+                            <p>Busca fomentar el emprendimiento, apoyar la creación de empresas, generar empleo y convertir ideas en proyectos productivos.</p>
+                            <p class="small-note"><strong>Ubicación consignada:</strong> Calle 57 # 8-69, Bogotá D. C. · Responsable pendiente.</p>
+                        </div> 
+                    </article>
+                    <article class="card"> 
+                        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=800&q=80" alt="Equipo en un ambiente laboral">
+                        <div class="card-body">
+                            <span class="tag">Empleo</span>
+                            <h3>Agencia Pública de Empleo</h3>
+                            <p>Facilita el encuentro entre quienes buscan empleo y los empleadores, sin cobrar por el servicio.</p>
+                            <p class="small-note"><strong>Ubicación consignada:</strong> Calle 65 # 11-70, primer piso, Bogotá D. C. · Responsable: Alejandra Rojas.</p>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" alt="Compañeros colaborando en un proyecto">
+                        <div class="card-body">
+                            <span class="tag">Relación empresarial</span>
+                            <h3>Relaciones corporativas</h3>
+                            <p>Permite trabajar junto con empresas, conocer sus necesidades y facilitar la conexión entre la formación y el mundo laboral.</p>
+                            <p class="small-note"><strong>Ubicación consignada:</strong> Carrera 13 # 65-10, Bogotá D. C. · Responsable pendiente.</p>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Investigación y tecnología en un computador">
+                        <div class="card-body">
+                            <span class="tag">Investigación</span>
+                            <h3>SENNOVA</h3>
+                            <p>Busca que los aprendices investiguen, creen ideas, desarrollen proyectos tecnológicos y encuentren soluciones a problemas reales.</p>
+                            <p class="small-note"><strong>Ubicación consignada:</strong> Centro Metalmecánico, carrera 29B # 17B-25 Sur · Responsable pendiente.</p>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=800&q=80" alt="Personas conversando y compartiendo">
+                        <div class="card-body">
+                            <span class="tag">Bienestar</span>
+                            <h3>Bienestar al aprendiz</h3>
+                            <p>Promueve actividades deportivas, culturales, artísticas y de salud; puede ofrecer apoyos de alimentación, transporte y sostenimiento según requisitos.</p>
+                            <p class="small-note"><strong>Responsable consignada:</strong> Lina Palencia · Centro Metalmecánico, carrera 29B # 17B-25 Sur.</p>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80" alt="Libros y estanterías de una biblioteca">
+                        <div class="card-body">
+                            <span class="tag">Estudio</span>
+                            <h3>Biblioteca</h3>
+                            <p>Permite recopilar información, estudiar, utilizar equipos y libros, fortalecer el conocimiento y facilitar el desarrollo de tareas.</p>
+                            <p class="small-note"><strong>Ubicación consignada:</strong> Centro Metalmecánico, carrera 29B # 17B-25 Sur · Responsable: Nury Andrea Forero Ariza.</p>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80" alt="Personas revisando información y documentos">
+                        <div class="card-body">
+                            <span class="tag">Gestión académica</span>
+                            <h3>Administración educativa</h3>
+                            <p>Organiza la información de los aprendices y apoya que los procesos de formación se desarrollen correctamente.</p>
+                            <p class="small-note"><strong>Ubicación consignada:</strong> Centro Metalmecánico, carrera 29B # 17B-25 Sur. La guía menciona a Jarinsson Gómez Repizo y Angie Lorena Pardo Gutiérrez.</p>
+                        </div>
+                    </article>
+                </div>
+                <div class="two-col" style="margin-top:38px"><img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=1000&q=85" alt="Uso de tecnología durante una actividad de aprendizaje"><div class="copy"><p class="eyebrow">FORMACIÓN PROFESIONAL INTEGRAL · FPI</p><h3>La formación va más allá de aprender una técnica</h3><p>La FPI es un proceso educativo teórico-práctico orientado a conocimientos técnicos y tecnológicos, actitudes y valores. Busca el desarrollo humano y la convivencia social, para que las personas actúen crítica y creativamente en los contextos productivo y social.</p><p>Su misión, según la guía, es intervenir en el desarrollo social y técnico de los trabajadores y promover actividades productivas que contribuyan al desarrollo social, económico y tecnológico del país.</p><div class="pill-list"><span>Saber · Conocimiento</span><span>Saber hacer · Desempeño práctico</span><span>Saber ser · Valores y ética</span></div></div></div>
+                <h3 class="subhead">Etapas de la formación profesional</h3>
+                <div class="timeline">
+                    <article>
+                        <h3>Etapa lectiva o electiva</h3>
+                        <p>La guía describe este periodo como el momento en que el aprendiz desarrolla la formación profesional integral en ambientes de aprendizaje para alcanzar los resultados previstos en el diseño curricular. Incluye prácticas en ambientes reales, acompañamiento y evaluación por parte de los instructores.</p>
+                    </article>
+                    <article>
+                        <h3>Etapa productiva</h3>
+                        <p>Es el periodo en que el aprendiz aplica, complementa, fortalece y consolida sus competencias, conocimientos, habilidades, destrezas, actitudes y valores. Debe permitir identificar, analizar y contribuir a resolver problemas reales del sector productivo. El centro asigna un instructor para seguimiento y evaluación.</p>
+                    </article>
+                </div>
+                <h3 class="subhead">Enfoque para el desarrollo de competencias</h3>
+                <p>El enfoque descrito en la guía es humanista-cognitivo, sistémico, flexible y permanente. Articula lo tecnológico y lo social, desarrolla procesos cognitivos, procedimentales y valorativo-actitudinales, y toma como punto de partida el proyecto de vida del aprendiz. Las competencias se evidencian en sus desempeños dentro de entornos sociales y productivos.</p>
+                <div class="three-points"> 
+                    <article class="point">
+                        <div class="symbol">01</div>
+                        <h3>Saber</h3>
+                        <p>Los conocimientos que se adquieren y se pueden explicar.</p>
+                    </article>
+                    <article class="point">
+                        <div class="symbol">02</div>
+                        <h3>Saber hacer</h3>
+                        <p>El desempeño en la práctica y la capacidad de aplicar lo aprendido.</p>
+                    </article>
+                    <article class="point">
+                        <div class="symbol">03</div>
+                        <h3>Saber ser</h3>
+                        <p>Los valores, la ética, las actitudes y la forma de relacionarse.</p>
+                    </article>
+                </div>
+                <h3 class="subhead">Competencias del programa ADSO presentes en la guía</h3>
+                <div class="competency-grid">
+                    <article class="competency">
+                        <h3>1. Planear la construcción del software</h3>
+                        <ul>
+                            <li>Interpretar el informe de diseño para definir el plan de trabajo.</li>
+                            <li>Seleccionar y configurar herramientas de desarrollo según las condiciones del software.</li>
+                            <li>Seleccionar herramientas de versionamiento para controlar cambios en el código.</li>
+                            <li>Definir estándares de codificación de acuerdo con las reglas de la plataforma seleccionada.</li>
+                        </ul>
+                    </article>
+                    <article class="competency">
+                        <h3>2. Construir la base de datos</h3>
+                        <ul>
+                            <li>Crear la base de datos e integrar objetos de acuerdo con la funcionalidad del software.</li>
+                            <li>Implementar restricciones de acuerdo con las reglas de diseño.</li>
+                            <li>Definir esquemas de seguridad para mantener la integridad de la información.</li>
+                        </ul>
+                    </article>
+                    <article class="competency">
+                        <h3>3. Crear componentes front-end</h3>
+                        <ul>
+                            <li>Generar plantillas y estilos de acuerdo con el diseño establecido.</li>
+                            <li>Crear interfaces de usuario aplicando buenas prácticas de usabilidad y accesibilidad.</li>
+                        </ul>
+                    </article>
+                </div>
+                <h3 class="subhead">Símbolos institucionales y nota periodística</h3><div class="two-col"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1000&q=85" alt="Materiales educativos en una mesa de estudio"><div class="copy"><h3>Himno, escudo, bandera y logosímbolo</h3><p>La guía propone reconocer los símbolos institucionales del SENA y preparar una nota periodística para una audiencia de noticiero radial sobre los aportes de las instituciones que intervinieron. En el PDF compartido aparecen los apartados “Misión”, “Himno”, “Escudo”, “Bandera” y “Logo-símbolo”, pero no se aprecia transcrito el contenido completo de la misión ni el texto del himno; por eso esta página conserva el tema sin inventar esos textos.</p><div class="quote">Idea central para la nota radial: el SENA acompaña la formación para el trabajo y cuenta con áreas que apoyan el emprendimiento, el empleo, la investigación, el bienestar y el acceso al conocimiento.</div></div></div>
+            </div>
+        </section>
+        <section class="section soft" id="guia2">
+            <div class="wrap">
+                <div class="heading">
+                    <div>
+                        <p class="eyebrow">CONTEXTUALIZACIÓN E IDENTIFICACIÓN DE CONOCIMIENTOS</p>
+                        <h2>Guía 2. Del material<br>al producto terminado</h2>
+                    </div>
+                    <span class="number">GUÍA 02</span>
+                </div>
+                <p style="max-width:850px;color:var(--muted);margin:-10px 0 30px">Esta guía recoge lo que se conoce y lo que se quiere aprender sobre las etapas de fabricación y comercialización de productos. El objetivo es relacionar la observación de los procesos con las habilidades necesarias para desempeñarse de manera profesional.</p>
+                <div class="process-grid">
+                <article class="process">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80" alt="Textiles y materiales">
+                    <div>
+                        <span class="step">PROCESO 01</span>
+                        <h3>Recepción de materias primas</h3>
+                        <p><strong>Lo que conozco:</strong> se reciben lonas y telas según color y densidad, hilos de distintos calibres, marquillas y cuero. Los materiales se utilizan en la fabricación; el cuero puede cortarse con patrones a mano o con máquina y desbastarse para reducir la carnaza.</p>
+                        <p><strong>Quiero aprender:</strong> identificar subgrupos y variedades de hilos, reconocer patrones y los productos para los que sirven, y conocer modas o tendencias que orienten el diseño.</p>
+                    </div>
+                </article>
+                <article class="process">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=700&q=80" alt="Revisión técnica de un producto">
+                    <div>
+                        <span class="step">PROCESO 02</span>
+                        <h3>Control de calidad</h3>
+                        <p><strong>Lo que conozco:</strong> se verifica la resistencia y la vida útil de lonas, telas y cremalleras; en el cuero se revisan el color y la calidad antes del corte.</p>
+                        <p><strong>Quiero aprender:</strong> qué máquinas e instrumentos se utilizan, cómo se realizan las pruebas y cuáles normativas deben cumplirse.</p>
+                    </div>
+                </article>
+                <article class="process">
+                    <img src="https://images.unsplash.com/photo-1455390582262-044c64b277e2?auto=format&fit=crop&w=700&q=80" alt="Diseño y planificación sobre una mesa">
+                    <div>
+                        <span class="step">PROCESO 03</span>
+                        <h3>Estampado y corte</h3>
+                        <p><strong>Lo que conozco:</strong> los patrones se pueden cortar manualmente en piezas pequeñas o automáticamente al ubicar la lona, el molde y programar la máquina. La guía menciona cortadoras frías para cremalleras, calientes para punta de correa y estampado screen para plasmar diseños sobre tela o lona.</p><p><strong>Quiero aprender:</strong> operar las máquinas automáticas de patrones, los equipos de frío y calor, las normas de seguridad y los procedimientos estandarizados para cortar, coser o bordar.</p>
+                    </div>
+                </article>
+                <article class="process">
+                    <img src="https://academiasisa.com/corte-y-confeccion-arte-y-tecnica-en-la-moda/" alt="Detalle de costura y confección">
+                    <div>
+                        <span class="step">PROCESO 04</span>
+                        <h3>Bordado</h3>
+                        <p><strong>Lo que conozco:</strong> se utiliza una máquina bordadora para plasmar diseños y logos de la compañía sobre tela o lona.</p>
+                        <p><strong>Quiero aprender:</strong> cómo se prepara y digitaliza el diseño, cómo se maneja la bordadora y si existe un procedimiento estandarizado para obtener resultados de calidad.</p>
+                    </div>
+                </article>
+                <article class="process">
+                    <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?auto=format&fit=crop&w=700&q=80" alt="Trabajo de fabricación manual">
+                    <div>
+                        <span class="step">PROCESO 05</span>
+                        <h3>Confección</h3>
+                        <p><strong>Lo que conozco:</strong> se elaboran partes del producto por equipos de trabajadores; se utilizan costuras y pegantes, y al finalizar se limpia, pule y realiza un control de calidad.</p>
+                        <p><strong>Quiero aprender:</strong> técnicas de confección y acabado, controles en cada etapa y criterios para verificar resistencia, presentación y cumplimiento de estándares.</p>
+                    </div>
+                </article>
+                <article class="process">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=700&q=80" alt="Cajas listas para almacenamiento y distribución">
+                    <div>
+                        <span class="step">PROCESO 06</span>
+                        <h3>Distribución</h3>
+                        <p><strong>Lo que conozco:</strong> el producto terminado se almacena en el centro de distribución; se clasifica por marcas como Totto y Totto Tú, se organizan cajas abiertas y cerradas, se empacan pedidos y se coloca un rótulo para el comprador nacional o internacional.</p>
+                        <p><strong>Quiero aprender:</strong> las normas y los procedimientos operativos estandarizados, las categorías, el rotulado y la información necesaria para distribuir pedidos de forma eficaz.</p>
+                    </div>
+                </article>
+                <article class="process">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=700&q=80" alt="Venta y atención al cliente">
+                    <div>
+                        <span class="step">PROCESO 07</span>
+                        <h3>Gestión de ventas</h3>
+                        <p><strong>Lo que conozco:</strong> la tienda Totto Flagship presenta la marca y organiza los productos por temáticas como trabajo o estudio, y por características como color, mujer u hombre.</p>
+                        <p><strong>Quiero aprender:</strong> calcular o comprender los costos de cada producto y conocer mejor cómo se clasifican los productos y sus categorías comerciales.</p>
+                    </div>
+                </article>
+            </div>
+            <h3 class="subhead">Tres conceptos que debo recordar</h3>
+            <div class="concepts">
+                <article class="concept">
+                    <strong>Insumo</strong>
+                    <p>Producto secundario o elemento utilizado durante el proceso productivo; en la guía se distingue de la materia prima principal.</p>
+                </article>
+                <article class="concept">
+                    <strong>Materia prima</strong>
+                    <p>Materiales principales que se utilizan para fabricar o transformar un producto.</p>
+                </article>
+                <article class="concept">
+                    <strong>Patrones</strong>
+                    <p>Moldes que permiten definir y cortar las partes esenciales que componen un producto.</p>
+                </article>
+            </div>
+            <div class="closing">
+                <div>
+                    <h3>¿Qué aporta conocer un proceso completo?</h3>
+                    <p>Ayuda a comprender la relación entre materiales, calidad, fabricación, almacenamiento y venta. También permite reconocer qué conocimientos técnicos y normas es necesario aprender para desempeñar bien cada labor.</p>
+                </div>
+                <a class="btn main" href="#guia3">Continuar a la Guía 3 ↘</a>
+            </div>
+        </div>
+    </section>
+<section class="section dark" id="guia3"><div class="wrap">
+ <div class="heading"><div><p class="eyebrow">REFLEXIÓN, AUTOCONOCIMIENTO Y RESPONSABILIDAD</p><h2>Guía 3. Construir mi<br>proyecto de vida</h2></div><span class="number">GUÍA 03</span></div>
+ <div class="two-col"><div class="copy"><h3>Lo imposible cuesta un poco más</h3><p>La guía invita a reflexionar sobre las palabras “imposible” y “derrotado”, a partir de las ideas atribuidas a José Mujica. Lo imposible representa aquello que parece muy difícil, pero puede requerir más esfuerzo, dedicación y perseverancia. Estar derrotado se relaciona con rendirse ante las dificultades y dejar de luchar por lo que se quiere alcanzar.</p><p>Estas ideas pueden aplicarse al enfrentar obstáculos para lograr metas personales, aprender cosas nuevas o resolver problemas en equipo. La dificultad no significa necesariamente que una meta sea inalcanzable; también puede ser una oportunidad para desarrollar paciencia y constancia.</p><div class="quote">El sentido que le damos a la vida es crecer como personas, aprender cosas nuevas, luchar por nuestros sueños, construir estabilidad, ayudar a nuestras familias y aportar algo positivo a la sociedad.</div></div><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85" alt="Espacio de trabajo para planear metas y proyectos"></div>
+ <h3 class="subhead">Las experiencias que nos forman</h3><div class="reflection-grid"><article class="reflection"><h3>Experiencias personales</h3><p>Los hechos que marcan la vida incluyen las experiencias personales, las enseñanzas de la familia, las amistades y las decisiones tomadas con el tiempo. Estas vivencias ayudan a fortalecer valores, aprender de los errores y comprender la importancia del esfuerzo.</p></article><article class="reflection"><h3>Dignidad y respeto</h3><p>Todas las personas tienen la misma dignidad y merecen respeto, igualdad y un trato justo, sin importar su cultura. Las diferencias culturales no eliminan la obligación de respetar los derechos humanos.</p></article><article class="reflection"><h3>Respeto a las culturas</h3><p>Las costumbres, creencias, tradiciones y maneras de ver el mundo pueden ser diferentes. Es importante no juzgar sin conocer, pero también reconocer que ninguna tradición debe justificar el maltrato o vulnerar la dignidad.</p></article><article class="reflection"><h3>Libertad con responsabilidad</h3><p>Respetar la diversidad no significa aceptar acciones que lesionen a otras personas. Las prácticas culturales deben ser compatibles con la dignidad, la igualdad y el bienestar humano.</p></article></div>
+</section>
+
+<!-- ==============================
+     SECCIÓN: CASO DE ESTUDIO #5
+================================== -->
+<section id="caso" class="caso-page">
+
+    <!-- PORTADA VISUAL -->
+    <div class="caso-hero">
+        <img
+            class="caso-hero-img"
+            src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1800&q=85"
+            alt="Equipo de personas reunidas para analizar una situación"
+        >
+
+        <div class="caso-hero-overlay"></div>
+
+        <div class="caso-hero-content">
+            <span class="caso-badge">SENA · ANÁLISIS FORMATIVO</span>
+            <h2>Caso de estudio <span>#5</span></h2>
+            <p>
+                Entre el cumplimiento académico, las dificultades
+                personales y el derecho a continuar la formación.
+            </p>
+
+            <a href="#caso-contexto" class="caso-btn">
+                Explorar el caso <span>↓</span>
+            </a>
+        </div>
+
+        <div class="caso-hero-number">05</div>
+    </div>
+
+    <!-- INTRODUCCIÓN -->
+    <div class="caso-intro" id="caso-contexto">
+        <div class="caso-intro-text">
+            <span class="caso-overline">01 / PLANTEAMIENTO</span>
+            <h3>Una situación que requiere análisis</h3>
+
+            <p>
+                El caso presenta a un aprendiz de formación tecnológica
+                que lleva más de dos trimestres en su proceso formativo.
+                Su actitud frente a la formación ha sido considerada
+                negligente y presenta dificultades en el cumplimiento
+                de sus resultados de aprendizaje.
+            </p>
+
+            <p>
+                Sin embargo, detrás de sus ausencias existe una situación
+                personal importante: una pérdida familiar, dificultades
+                económicas y la responsabilidad de convertirse en el
+                sostén económico de su familia.
+            </p>
+
+            <p>
+                Ante esta situación, el equipo de instructores se reúne
+                para analizar los antecedentes, valorar las circunstancias
+                y determinar cómo proceder de acuerdo con el reglamento
+                del aprendiz.
+            </p>
+        </div>
+
+        <div class="caso-intro-image">
+            <img
+                src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=900&q=85"
+                alt="Personas compartiendo un espacio de aprendizaje"
+                loading="lazy"
+            >
+            <div class="caso-image-caption">
+                <strong>El contexto importa</strong>
+                <span>Comprender antes de decidir.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CIFRAS DEL CASO -->
+    <div class="caso-stats">
+        <div class="caso-stat">
+            <span class="caso-stat-number">32%</span>
+            <span class="caso-stat-title">Resultados de aprendizaje sin aprobar</span>
+            <p>Desempeño académico reportado en el caso.</p>
+        </div>
+
+        <div class="caso-stat">
+            <span class="caso-stat-number">2+</span>
+            <span class="caso-stat-title">Llamados de atención</span>
+            <p>El documento informa más de dos llamados por escrito.</p>
+        </div>
+
+        <div class="caso-stat">
+            <span class="caso-stat-number">1+</span>
+            <span class="caso-stat-title">Mes de ausencia</span>
+            <p>El aprendiz lleva más de un mes sin regresar a la institución.</p>
+        </div>
+
+        <div class="caso-stat">
+            <span class="caso-stat-number">100%</span>
+            <span class="caso-stat-title">Plan de mejoramiento aprobado</span>
+            <p>El caso indica que el aprendiz aprobó el plan asignado.</p>
+        </div>
+    </div>
+
+    <!-- ANTECEDENTES -->
+    <div class="caso-antecedentes">
+        <div class="caso-section-heading">
+            <span class="caso-overline">02 / ANTECEDENTES</span>
+            <h3>¿Qué ha sucedido hasta el momento?</h3>
+            <p>
+                Estos son los principales hechos que el equipo de
+                instructores debe tener presentes al analizar el caso.
+            </p>
+        </div>
+
+        <div class="caso-ante-grid">
+
+            <article class="caso-ante-card">
+                <div class="caso-ante-icon">01</div>
+                <h4>Desempeño académico bajo</h4>
+                <p>
+                    El aprendiz tiene un 32 % de resultados de aprendizaje
+                    sin aprobar, según la información presentada en el
+                    documento.
+                </p>
+            </article>
+
+            <article class="caso-ante-card">
+                <div class="caso-ante-icon">02</div>
+                <h4>Llamados de atención</h4>
+                <p>
+                    Se han realizado más de dos llamados de atención
+                    por escrito relacionados con el incumplimiento
+                    de sus responsabilidades formativas.
+                </p>
+            </article>
+
+            <article class="caso-ante-card">
+                <div class="caso-ante-icon">03</div>
+                <h4>Plan de mejoramiento</h4>
+                <p>
+                    El aprendiz recibió un plan de mejoramiento y,
+                    de acuerdo con el caso, logró aprobarlo.
+                </p>
+            </article>
+
+            <article class="caso-ante-card">
+                <div class="caso-ante-icon">04</div>
+                <h4>Calamidad familiar y económica</h4>
+                <p>
+                    Tras una pérdida familiar, enfrenta dificultades
+                    económicas y actualmente es el sostén económico
+                    de su familia. Lleva más de un mes sin asistir.
+                </p>
+            </article>
+
+        </div>
+    </div>
+
+    <!-- DEBIDO PROCESO -->
+    <div class="caso-proceso">
+        <div class="caso-proceso-image">
+            <img
+                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=85"
+                alt="Documentos y trabajo de análisis"
+                loading="lazy"
+            >
+        </div>
+
+        <div class="caso-proceso-content">
+            <span class="caso-overline">03 / PROCEDIMIENTO</span>
+            <h3>Debido proceso según el documento</h3>
+
+            <p>
+                El documento señala que ya se han realizado llamados
+                de atención y un plan de mejoramiento. También plantea
+                que las ausencias continuas pueden dar lugar a revisar
+                un posible proceso de deserción.
+            </p>
+
+            <p>
+                No obstante, la calamidad doméstica y económica
+                descrita hace necesario revisar las circunstancias
+                particulares antes de definir cómo continuar.
+            </p>
+
+            <div class="caso-proceso-list">
+                <div>
+                    <span>1</span>
+                    <p>
+                        <strong>Revisar los antecedentes</strong>
+                        <small>Verificar los llamados de atención y el plan de mejoramiento.</small>
+                    </p>
+                </div>
+
+                <div>
+                    <span>2</span>
+                    <p>
+                        <strong>Examinar la situación personal</strong>
+                        <small>Considerar la pérdida familiar, la crisis económica y las ausencias.</small>
+                    </p>
+                </div>
+
+                <div>
+                    <span>3</span>
+                    <p>
+                        <strong>Valorar los soportes</strong>
+                        <small>El documento propone presentar pruebas de la situación familiar o económica.</small>
+                    </p>
+                </div>
+
+                <div>
+                    <span>4</span>
+                    <p>
+                        <strong>Determinar el procedimiento</strong>
+                        <small>Analizar las alternativas o continuar el proceso institucional que corresponda.</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOPORTES -->
+    <div class="caso-soportes">
+        <div class="caso-soportes-text">
+            <span class="caso-overline">04 / EVIDENCIAS</span>
+            <h3>¿Cómo puede demostrar su situación?</h3>
+
+            <p>
+                En el documento se plantea que el aprendiz puede
+                presentar soportes que permitan comprender las
+                circunstancias que está atravesando.
+            </p>
+
+            <div class="caso-soporte-item">
+                <span class="caso-check">✓</span>
+                <div>
+                    <strong>Acta de defunción</strong>
+                    <p>Como soporte de la pérdida del familiar fallecido.</p>
+                </div>
+            </div>
+
+            <div class="caso-soporte-item">
+                <span class="caso-check">✓</span>
+                <div>
+                    <strong>Documentos sobre la crisis económica</strong>
+                    <p>Elementos que permitan demostrar las dificultades económicas actuales.</p>
+                </div>
+            </div>
+
+            <div class="caso-soporte-item">
+                <span class="caso-check">✓</span>
+                <div>
+                    <strong>Explicación de las circunstancias</strong>
+                    <p>Información que ayude a relacionar la situación personal con las ausencias y el bajo rendimiento.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="caso-soportes-image">
+            <img
+                src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=85"
+                alt="Documentos utilizados para revisar una situación"
+                loading="lazy"
+            >
+            <div class="caso-document-label">
+                <span>DOCUMENTACIÓN</span>
+                <strong>La evidencia ayuda a comprender el contexto.</strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOS POSIBLES ESCENARIOS -->
+    <div class="caso-escenarios">
+        <div class="caso-section-heading">
+            <span class="caso-overline">05 / ANÁLISIS DE ALTERNATIVAS</span>
+            <h3>¿Qué puede suceder con el aprendiz?</h3>
+            <p>
+                El documento contempla dos escenarios según la
+                justificación de las ausencias y la situación presentada.
+            </p>
+        </div>
+
+        <div class="caso-escenarios-grid">
+
+            <article class="caso-escenario caso-escenario-ayuda">
+                <div class="caso-escenario-top">
+                    <span class="caso-escenario-icon">🤝</span>
+                    <span class="caso-escenario-label">ESCENARIO 1</span>
+                </div>
+
+                <h4>Se demuestra la calamidad</h4>
+
+                <p>
+                    Si el aprendiz presenta soportes de la pérdida
+                    familiar o de la crisis económica, el documento
+                    plantea que su caso puede ser analizado considerando
+                    esas circunstancias.
+                </p>
+
+                <ul>
+                    <li>Revisar los documentos aportados.</li>
+                    <li>Valorar su situación individual.</li>
+                    <li>Examinar posibles ayudas o alternativas para continuar la formación.</li>
+                </ul>
+
+                <div class="caso-escenario-result">
+                    <strong>Propósito</strong>
+                    <p>
+                        Considerar un camino que le permita continuar
+                        su proceso formativo, según la valoración
+                        institucional correspondiente.
+                    </p>
+                </div>
+            </article>
+
+            <article class="caso-escenario caso-escenario-proceso">
+                <div class="caso-escenario-top">
+                    <span class="caso-escenario-icon">⚖️</span>
+                    <span class="caso-escenario-label">ESCENARIO 2</span>
+                </div>
+
+                <h4>No existe justificación suficiente</h4>
+
+                <p>
+                    Si el aprendiz no justifica sus ausencias y
+                    continúa incumpliendo sus responsabilidades,
+                    el documento indica que el instructor encargado
+                    debe llevar el caso al equipo ejecutor.
+                </p>
+
+                <ul>
+                    <li>Analizar y documentar el caso.</li>
+                    <li>Llevarlo al comité de evaluación.</li>
+                    <li>Iniciar formalmente el procedimiento correspondiente, si procede.</li>
+                </ul>
+
+                <div class="caso-escenario-result">
+                    <strong>Propósito</strong>
+                    <p>
+                        Seguir el procedimiento institucional de
+                        acuerdo con el reglamento aplicable y las
+                        circunstancias verificadas.
+                    </p>
+                </div>
+            </article>
+
+        </div>
+    </div>
+
+    <!-- ARTÍCULOS MENCIONADOS -->
+    <div class="caso-reglamento">
+        <div class="caso-section-heading">
+            <span class="caso-overline">06 / MARCO NORMATIVO</span>
+            <h3>Artículos mencionados en el caso</h3>
+            <p>
+                Estas son las referencias que aparecen expresamente
+                en el documento entregado.
+            </p>
+        </div>
+
+        <div class="caso-articulos">
+
+            <article class="caso-articulo">
+                <div class="caso-articulo-num">21</div>
+                <div>
+                    <h4>Capítulo V · Reglamento del aprendiz</h4>
+                    <p>
+                        El documento lo menciona al plantear que la
+                        situación particular del aprendiz puede
+                        ser considerada para analizar posibles
+                        alternativas de apoyo o continuidad.
+                    </p>
+                </div>
+            </article>
+
+            <article class="caso-articulo">
+                <div class="caso-articulo-num">23</div>
+                <div>
+                    <h4>Capítulo V · Reglamento del aprendiz</h4>
+                    <p>
+                        Se cita en relación con las faltas continuas
+                        y el posible motivo de deserción descrito
+                        en el caso.
+                    </p>
+                </div>
+            </article>
+
+            <article class="caso-articulo">
+                <div class="caso-articulo-num">24</div>
+                <div>
+                    <h4>Capítulo V · Reglamento del aprendiz</h4>
+                    <p>
+                        Se menciona para el procedimiento relacionado
+                        con la deserción, en caso de que corresponda
+                        continuar con dicho proceso.
+                    </p>
+                </div>
+            </article>
+
+            <article class="caso-articulo">
+                <div class="caso-articulo-num">32</div>
+                <div>
+                    <h4>Capítulo VII · Reglamento del aprendiz</h4>
+                    <p>
+                        El documento lo relaciona con los llamados
+                        de atención y el plan de mejoramiento que
+                        el aprendiz aprobó.
+                    </p>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="caso-aviso-legal">
+            <strong>Importante:</strong>
+            las referencias anteriores reproducen la interpretación
+            que aparece en el documento del caso. Antes de utilizarlas
+            como fundamento de una decisión formal, es necesario
+            consultar la versión vigente del Reglamento del Aprendiz
+            del SENA y verificar el contenido exacto de cada artículo.
+        </div>
+    </div>
+
+    <!-- REFLEXIÓN FINAL -->
+    <div class="caso-cierre">
+        <img
+            src="https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=1600&q=85"
+            alt="Estudiantes reunidos en un entorno educativo"
+            loading="lazy">
+
+        <div class="caso-cierre-overlay"></div>
+
+            <div class="caso-cierre-content">
+                <span class="caso-overline">07 / CONCLUSIÓN</span>
+                <h3>La formación también requiere comprensión</h3>
+
+                <p>
+                    Este caso demuestra que una situación académica no
+                    siempre puede analizarse sin tener en cuenta el
+                    contexto personal del aprendiz. Aunque existen
+                    antecedentes de incumplimiento, también se presenta
+                    una calamidad familiar y económica que debe ser
+                    examinada de manera responsable.
+                </p>
+
+                <p>
+                    Por ello, consideramos importante escuchar al aprendiz,
+                    revisar los soportes, verificar el reglamento aplicable
+                    y evaluar las alternativas disponibles antes de
+                    establecer una decisión. De esta manera se puede
+                    mantener el cumplimiento de las normas y, al mismo
+                    tiempo, actuar con respeto y equidad.
+                </p>
+
+                <div class="caso-firma">
+                    <span></span>
+                    <p>ANÁLISIS ACADÉMICO · GRUPO DE FORMACIÓN ADSO</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-info">
+            <h2>Mi ruta de formación · SENA</h2>
+            <p>
+                Proyecto académico desarrollado como parte del
+                programa de formación ADSO.
+            </p>
+            <p class="footer-program">
+                Análisis y Desarrollo de Software
+            </p>
+        </div>
+
+        <div class="footer-participants">
+            <h3>Integrantes del grupo</h3>
+            <ul>
+                <li>Yomaris Herrera Valero</li>
+                <li>Andrea Sarmiento</li>
+                <li>Jesús Leonardo Quintero Duarte</li>
+                <li>Luis Santiago Cucunuba Mendivelso</li>
+                <li>Luisa Fernanda Vargas Perez</li>
+            </ul>
+        </div>
+
+        <div class="footer-links">
+            <h3>Explorar</h3>
+            <a href="#guia1">Guía 1</a>
+            <a href="#guia2">Guía 2</a>
+            <a href="#guia3">Guía 3</a>
+            <a href="#dimensiones">Desarrollo integral</a>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 · Proyecto académico SENA · ADSO</p>
+    </div>
+</footer><button class="backtop" id="backtop" aria-label="Volver arriba">↑</button>
+<script>
+    const menuBtn=document.getElementById('menuBtn');const nav=document.getElementById('nav');
+menuBtn.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));menuBtn.textContent=open?'✕':'☰'});
+nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='☰'}));
+const backtop=document.getElementById('backtop');window.addEventListener('scroll',()=>backtop.classList.toggle('show',window.scrollY>500));backtop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+const sections=[...document.querySelectorAll('main section[id]')];const navLinks=[...nav.querySelectorAll('a')];const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id))}})},{rootMargin:'-30% 0px -60% 0px'});sections.forEach(s=>observer.observe(s));
+// Si una imagen remota no carga, se muestra un fondo alternativo agradable.
+document.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{img.style.background='linear-gradient(135deg,#dcefd9,#a9d5b4)';img.style.minHeight='140px';img.alt=img.alt+' (imagen no disponible sin conexión)'}));
+</script>
+</body>
+</html>
